@@ -12,7 +12,7 @@ before_script:
 script:
   - df -kh
   - ng lint
-  - travis_wait npm run build:prod
+  - npm run build:prod
 
 deploy:
   provider: pages
