@@ -1,7 +1,7 @@
 
-sudo: required
-dist: trusty
-language: node_js
+os: linux
+dist: xenial
+language: minimal
 node_js:
   - "lts/*"
 
@@ -10,14 +10,15 @@ before_script:
   - npm install -g --silent @angular/cli@7.3.9
 
 script:
+  - df -kh
   - ng lint
-  - npm run build:prod
+  - travis_wait npm run build:prod
 
 deploy:
   provider: pages
-  skip-cleanup: true
-  local-dir: dist/web-app
-  github-token: $GITHUB_TOKEN
-  keep-history: true
+  local_dir: dist/web-app
+  token: $GITHUB_TOKEN
+  keep_history: true
   on:
     branch: master
+  edge: true
